@@ -1,10 +1,11 @@
 edition: 3.0.0
-name: web-framework-app
+name: start-webpy-app
 access: '{{ access }}'
 vars:
   region: '{{ region }}'
+  functionName: '{{ functionName }}'
 resources:
-  framework:
+  start_webpy:
     component: fc3
     actions:
       pre-deploy:
@@ -22,7 +23,7 @@ resources:
           - index.py
           - '9000'
         port: 9000
-      functionName: '{{ functionName }}'
+      functionName: ${vars.functionName}
       code: ./code
       triggers:
         - triggerName: httpTrigger
@@ -40,4 +41,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

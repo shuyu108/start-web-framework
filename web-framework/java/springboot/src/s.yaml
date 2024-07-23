@@ -5,12 +5,13 @@
 
 edition: 3.0.0
 name: springboot-app
-access: "{{ access }}"
-vars:
-  region: "{{ region }}"
+access: '{{ access }}'
+vars: 
+  region: '{{ region }}'
+  functionName: '{{ functionName }}'
 
 resources:
-  framework:
+  start_springboot:
     component: fc3
     actions:
       pre-deploy:
@@ -27,7 +28,7 @@ resources:
       customRuntimeConfig:
         command:
           - ./bootstrap
-      functionName: "{{ functionName }}"
+      functionName: ${vars.functionName}
       code: ./code
       triggers:
         - triggerName: httpTrigger
@@ -49,4 +50,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

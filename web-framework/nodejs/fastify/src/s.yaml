@@ -8,8 +8,9 @@ name: fastify-app
 access: "{{ access }}"
 vars:
   region: "{{ region }}"
+  functionName: "{{ functionName }}"
 resources:
-  framework:
+  start_fastify:
     component: fc3
     actions:
       pre-deploy:
@@ -34,7 +35,7 @@ resources:
           - node
           - ./index.js
         port: 9000
-      functionName: "{{ functionName }}"
+      functionName: ${vars.functionName}
       code: ./code
       triggers:
         - triggerName: httpTrigger
@@ -55,4 +56,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

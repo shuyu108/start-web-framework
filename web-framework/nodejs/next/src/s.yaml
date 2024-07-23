@@ -4,12 +4,13 @@
 # ------------------------------------
 
 edition: 3.0.0
-name: express-app
+name: start-next-app
 access: "{{ access }}"
 vars:
   region: "{{ region }}"
+  functionName: "{{ functionName }}"
 resources:
-  framework:
+  start_next:
     component: fc3
     actions:
       pre-deploy:
@@ -40,7 +41,7 @@ resources:
           - node
           - ./server.js
         port: 3000
-      functionName: "{{ functionName }}"
+      functionName: ${vars.functionName}
       code: ./code/.next/standalone
       triggers:
         - triggerName: httpTrigger
@@ -61,4 +62,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

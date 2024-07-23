@@ -8,8 +8,9 @@ name: thinkphp-app
 access: '{{ access }}'
 vars: 
   region: '{{ region }}'
+  functionName: '{{ functionName }}'
 resources:
-  framework: 
+  start_thinkphp: 
     component: fc3 
     props: 
       region: ${vars.region} 
@@ -21,7 +22,7 @@ resources:
         command:
           - ./bootstrap
         port: 9000
-      functionName: '{{ functionName }}'
+      functionName: ${vars.functionName}
       code: ./code
   fc3_domain_0:
     component: fc3-domain
@@ -32,4 +33,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

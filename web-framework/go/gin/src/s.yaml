@@ -1,10 +1,11 @@
 edition: 3.0.0
-name: web-framework-app
+name: start-gin-app
 access: '{{ access }}'
 vars:
   region: '{{ region }}'
+  functionName: '{{ functionName }}'
 resources:
-  framework:
+  start_gin:
     component: fc3
     actions:
       pre-deploy:
@@ -25,7 +26,7 @@ resources:
         command:
           - /code/main
         port: 8080
-      functionName: '{{ functionName }}'
+      functionName: ${vars.functionName}
       code: ./code/target
       triggers:
         - triggerName: httpTrigger
@@ -48,4 +49,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

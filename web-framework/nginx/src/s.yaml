@@ -8,8 +8,9 @@ name: nginx-app
 access: "{{ access }}"
 vars:
   region: "{{ region }}"
+  functionName: "{{ functionName }}"
 resources:
-  framework:
+  start_nginx:
     component: fc3
     props:
       region: ${vars.region}
@@ -30,7 +31,7 @@ resources:
           - "-g"
           - "daemon off;"
         port: 9000
-      functionName: "{{ functionName }}"
+      functionName: ${vars.functionName}}
       code: ./code
       triggers:
         - triggerName: httpTrigger
@@ -51,4 +52,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

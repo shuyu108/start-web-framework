@@ -4,12 +4,13 @@
 # ------------------------------------
 
 edition: 3.0.0
-name: fastapi-app
+name: start-fastapi-app
 access: '{{ access }}'
 vars: 
   region: '{{ region }}'
+  functionName: '{{ functionName }}'
 resources:
-  framework: 
+  start_fastapi: 
     component: fc3
     actions: 
       pre-deploy: 
@@ -31,7 +32,7 @@ resources:
         args:
           - '-u'
           - index.py
-      functionName: '{{ functionName }}'
+      functionName: ${vars.functionName}
       code: ./code
   fc3_domain_0:
     component: fc3-domain
@@ -42,4 +43,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

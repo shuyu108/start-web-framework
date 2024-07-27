@@ -1,11 +1,11 @@
 edition: 3.0.0
-name: web-framework-app
+name: start-hapi-app
 access: '{{ access }}'
 vars:
   region: '{{ region }}'
   functionName: '{{ functionName }}'
 resources:
-  framework:
+  start_hapi:
     component: fc3
     actions:
       pre-deploy:

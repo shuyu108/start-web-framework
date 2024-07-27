@@ -9,8 +9,9 @@ access: "{{ access }}"
 vars:
   region: "{{ region }}"
   proxyPass: "{{ proxyPass }}"
+  functionName: "{{ functionName }}"
 resources:
-  framework:
+  nginx_reverse_proxy:
     component: fc3
     props:
       region: ${vars.region}
@@ -27,7 +28,7 @@ resources:
         command:
           - ./start.sh
         port: 9000
-      functionName: "{{ functionName }}"
+      functionName: ${vars.functionName}
       code: ./code
       environmentVariables:
         PROXY_PASS: ${vars.proxyPass}
@@ -53,4 +54,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

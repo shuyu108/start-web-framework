@@ -1,11 +1,11 @@
 edition: 3.0.0
-name: web-framework-app
+name: start-nuxt-app
 access: '{{ access }}'
 vars:
   region: '{{ region }}'
   functionName: '{{ functionName }}'
 resources:
-  framework:
+  start_nuxt:
     component: fc3
     actions:
       # CICD 阶段执行构建，且声明 node18 版本

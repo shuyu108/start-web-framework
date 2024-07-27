@@ -4,13 +4,13 @@
 # ------------------------------------
 
 edition: 3.0.0
-name: web-framework-app
+name: start-egg-app
 access: '{{ access }}'
 vars:
   region: '{{ region }}'
   functionName: '{{ functionName }}'
 resources:
-  framework:
+  start_egg:
     component: fc3
     actions:
       pre-deploy:

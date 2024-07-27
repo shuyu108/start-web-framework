@@ -3,8 +3,9 @@ name: start-tornado-app
 access: '{{ access }}'
 vars:
   region: '{{ region }}'
+  functionName: '{{ functionName }}'
 resources:
-  framework:
+  start_tornado:
     component: fc3
     actions:
       pre-deploy:
@@ -21,7 +22,7 @@ resources:
         args:
           - '-u'
           - index.py
-      functionName: '{{ functionName }}'
+      functionName: ${vars.functionName}
       code: ./code
       triggers:
         - triggerName: httpTrigger
@@ -39,4 +40,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

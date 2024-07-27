@@ -4,12 +4,13 @@
 # ------------------------------------
 
 edition: 3.0.0
-name: web-framework-app
+name: start-django-app
 access: '{{ access }}'
 vars: 
   region: '{{ region }}'
+  functionName: '{{ functionName }}'
 resources:
-  framework: 
+  start_django: 
     component: fc3 
     actions: 
       pre-deploy: 
@@ -27,7 +28,7 @@ resources:
           - "runserver"
           - "0.0.0.0:9000"
       timeout: 60
-      functionName: '{{ functionName }}'
+      functionName: ${vars.functionName}
       code: ./code
   fc3_domain_0:
     component: fc3-domain
@@ -38,4 +39,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

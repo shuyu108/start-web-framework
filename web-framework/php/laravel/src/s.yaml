@@ -1,10 +1,11 @@
 edition: 3.0.0
-name: web-framework-app
+name: start-laravel-app
 access: '{{ access }}'
 vars:
   region: '{{ region }}'
+  functionName: '{{ functionName }}'
 resources:
-  framework:
+  start_laravel:
     component: fc3
     props:
       region: ${vars.region}
@@ -18,7 +19,7 @@ resources:
         args:
           - '-c'
           - /code/start.sh
-      functionName: '{{ functionName }}'
+      functionName: ${vars.functionName}
       code: ./code
       triggers:
         - triggerName: httpTrigger
@@ -41,4 +42,4 @@ resources:
       routeConfig:
         routes:
           - path: /*
-            functionName: ${resources.framework.props.functionName}
+            functionName: ${vars.functionName}

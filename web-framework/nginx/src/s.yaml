@@ -31,7 +31,7 @@ resources:
           - "-g"
           - "daemon off;"
         port: 9000
-      functionName: ${vars.functionName}}
+      functionName: ${vars.functionName}
       code: ./code
       triggers:
         - triggerName: httpTrigger
